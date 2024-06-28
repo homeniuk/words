@@ -4,6 +4,7 @@ import cors, { CorsOptions } from "cors";
 import cookieParser from 'cookie-parser';
 import bodyParser from 'body-parser';
 import mongoose from 'mongoose';
+import router from './router';
 
 const PORT = process.env.PORT;
 const DB_URL = String(process.env.DB_URL);
@@ -19,7 +20,7 @@ app.use(express.json());
 app.use(cookieParser());
 app.use(bodyParser.json());
 app.use(cors(corsOptions));
-
+app.use('/', router);
 
 app.get('/', (req: Request, res: Response) => {
   res.send('Hello, World!');
@@ -31,8 +32,10 @@ app.get('/', (req: Request, res: Response) => {
 
 const start = async () => {
   try {
-      await mongoose.connect(DB_URL)
-      app.listen(PORT, () => console.log(`Server started on PORT = ${PORT}`))
+    if (DB_URL === "")
+      throw "DB_URL is empty";
+    await mongoose.connect(DB_URL)
+    app.listen(PORT, () => console.log(`Server started on PORT = ${PORT}`))
   } catch (e) {
       console.log(e);
   }
