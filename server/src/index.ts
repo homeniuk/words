@@ -5,10 +5,10 @@ import cookieParser from 'cookie-parser';
 import bodyParser from 'body-parser';
 import mongoose from 'mongoose';
 import router from './router';
+import { errorHandler } from './middlewares/ErrorHandler';
 
 const PORT = process.env.PORT;
 const DB_URL = String(process.env.DB_URL);
-
 
 const corsOptions: CorsOptions = {
   credentials: true,
@@ -26,9 +26,8 @@ app.get('/', (req: Request, res: Response) => {
   res.send('Hello, World!');
 });
 
-/*app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`);
-});*/
+app.all('*', ()=> {throw new Error('new error')});
+app.use(errorHandler);
 
 const start = async () => {
   try {
@@ -42,5 +41,3 @@ const start = async () => {
 }
 
 start()
-//cd server
-//npm run dev
