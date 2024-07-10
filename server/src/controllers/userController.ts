@@ -19,11 +19,11 @@ export const register = async (req: express.Request, res: express.Response, next
             return; 
         }
 
-        const hashPassword = await bcrypt.hash(password, 3);
-        const user = await createUser({username, email, password: hashPassword});
+        const hashPassword  = await bcrypt.hash(password, 3);
+        const user          = await createUser({username, email, password: hashPassword});
 
-        const payload = {id:user._id, username, email};
-        const token = jwt.sign(payload, String(process.env.JWT_SECRET), {expiresIn: '30d'});
+        const payload       = {id:user._id, username, email};
+        const token         = jwt.sign(payload, String(process.env.JWT_SECRET), {expiresIn: '30d'});
 
         copyWordsToUser(String(user._id));
 
