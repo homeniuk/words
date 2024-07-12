@@ -7,6 +7,16 @@
         "name": "Attach",
         "restart": true,
         "processId": "${command:PickProcess}"
+      },
+      {
+        "name": "Chrome",
+        "type": "chrome",
+        "request": "launch",
+        "url": "http://localhost:3000",
+        "webRoot": "${workspaceFolder}/front/src",
+        "sourceMapPathOverrides": {
+          "webpack:///src/*": "${webRoot}/*"
+        }
       }
     ]
   }
