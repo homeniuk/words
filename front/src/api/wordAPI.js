@@ -1,7 +1,7 @@
 import axios from 'axios';
 
-axios.defaults.withCredentials = true;
-const baseUrl = "http://127.0.0.1:5000/";
+//axios.defaults.withCredentials = true;
+const baseUrl = "http://195.191.25.72:5001/";
 
 const getConfig = () => {
   const token = localStorage.getItem('token');

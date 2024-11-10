@@ -12,7 +12,7 @@ const DB_URL = String(process.env.DB_URL);
 
 const corsOptions: CorsOptions = {
   credentials: true,
-  origin: "http://localhost:3000"
+  origin: process.env.FRONT_URL
 };
 
 const app = express();
@@ -23,7 +23,7 @@ app.use(cors(corsOptions));
 app.use('/', router);
 
 app.get('/', (req: Request, res: Response) => {
-  res.send('Hello, World!');
+  res.send('It is back for words');
 });
 
 app.all('*', ()=> {throw new Error('new error')});
